@@ -53,7 +53,7 @@ public class CharacterCollisions : MonoBehaviour {
 	}
 
 	void CheckInteraction (GameObject obj) {
-		InteractionHandler script = obj.GetComponent<InteractionHandler> ();
+		SwitchHandler script = obj.GetComponent<SwitchHandler> ();
 		if (Input.GetAxis ("Interaction") > 0) {
 			if(obj.tag == "Switch") {
 				//Checks if the switch is on cooldown
@@ -68,20 +68,18 @@ public class CharacterCollisions : MonoBehaviour {
 					cdForInteraction = true;
 
 					//Change the state of the switch
-					Debug.Log("You clicked the switch");
 					script.ChangeState();
 					GameObject door = obj.transform.parent.FindChild("Door").gameObject;
-					door.GetComponent<InteractionHandler>().ChangeState();
+					door.GetComponent<SwitchHandler>().ChangeState();
 				}
 			} else if (obj.tag == "Door") {
-				if(script.GetState() == InteractionHandler.States.FINAL){
+				if(script.GetState() == SwitchHandler.State.OPEN){
 					//Save character position for next level.
 					GameStats.charPosX = transform.position.x;
 					GameStats.charPosY = transform.position.y;
 
 					//Go through the door
 					obj.GetComponent<DoorHandler>().GoThroughDoor();
-					Debug.Log("YOU WENT THROUGH THE DOOR! :D");
 				}
 			} else {
 				//Save character position for next level.

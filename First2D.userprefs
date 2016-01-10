@@ -1,16 +1,19 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DoorHandler.cs">
     <Files>
-      <File FileName="Assets\Scripts\DoorHandler.cs" Line="6" Column="20" />
-      <File FileName="Assets\Scripts\CharacterCollisions.cs" Line="91" Column="26" />
-      <File FileName="Assets\Scripts\CharController.cs" Line="37" Column="48" />
-      <File FileName="Assets\Scripts\GameStats.cs" Line="6" Column="46" />
-      <File FileName="Assets\Scripts\InteractionHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameStats.cs" Line="49" Column="27" />
+      <File FileName="Assets\RoomSetup.cs" Line="42" Column="1" />
+      <File FileName="Assets\Scripts\DoorHandler.cs" Line="32" Column="4" />
+      <File FileName="Assets\DoorSystem.cs" Line="6" Column="16" />
+      <File FileName="Assets\Scripts\SwitchHandler.cs" Line="40" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Anne-Katrine\Documents\GitHub\First2D\Assets\RoomSetup.cs" line="38" column="1" />
+      <Breakpoint file="C:\Users\Anne-Katrine\Documents\GitHub\First2D\Assets\RoomSetup.cs" line="42" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
