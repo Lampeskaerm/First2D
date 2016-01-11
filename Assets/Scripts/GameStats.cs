@@ -59,13 +59,19 @@ public class GameStats : MonoBehaviour {
 	}
 
 	public void ChangeScene (int no) {
-		if(
+		if (roomList [no] == null)
+			roomList [no] = NewRoom (no);
 
-		if (gameStats.GetRoom(sceneNo) == null)
-			gameStats.SetRoom(gameStats.NewRoom (sceneNo), sceneNo);
+		SetItemsInactive ();
 
-		gameStats.SetCurrentRoomNo (sceneNo);
-		gameStats.currentRoom = gameStats.GetRoom(sceneNo);
+		currentRoomNo = no;
+		currentRoom = roomList [no];
+	}
+
+	public void SetItemsInactive() {
+		foreach (GameObject go in currentRoom.doorSystems) {
+			go.SetActive (false);
+		}
 	}
 }
 
@@ -74,7 +80,7 @@ public class Room {
 
 	public int roomNo;
 	public bool spawned;
-	public List<GameObject> doorSystems = new List<GameObject>();
+	public Dictionary<int,bool> itemsInfo = new Dictionary<int,bool>();
 
 	public Room (int no) {
 		roomNo = no;
