@@ -1,19 +1,31 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DoorHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameStats.cs">
     <Files>
-      <File FileName="Assets\Scripts\GameStats.cs" Line="49" Column="27" />
-      <File FileName="Assets\RoomSetup.cs" Line="42" Column="1" />
-      <File FileName="Assets\Scripts\DoorHandler.cs" Line="32" Column="4" />
-      <File FileName="Assets\DoorSystem.cs" Line="6" Column="16" />
-      <File FileName="Assets\Scripts\SwitchHandler.cs" Line="40" Column="27" />
+      <File FileName="Assets\Scripts\DoorSystem.cs" Line="16" Column="39" />
+      <File FileName="Assets\Scripts\DoorHandler.cs" Line="35" Column="55" />
+      <File FileName="Assets\Scripts\GameStats.cs" Line="69" Column="3" />
+      <File FileName="Assets\Scripts\SwitchHandler.cs" Line="35" Column="29" />
+      <File FileName="Assets\Scripts\RoomSetup.cs" Line="34" Column="42" />
+      <File FileName="Assets\Scripts\CharacterCollisions.cs" Line="11" Column="33" />
     </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>gameStats.roomList[0].doorSystems</Value>
+          <Value>gameStats.roomList[0].doorSystems[0]</Value>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\Anne-Katrine\Documents\GitHub\First2D\Assets\RoomSetup.cs" line="38" column="1" />
       <Breakpoint file="C:\Users\Anne-Katrine\Documents\GitHub\First2D\Assets\RoomSetup.cs" line="42" column="1" />
+      <Breakpoint file="D:\Documents\Unity Projects\First2D\Assets\Scripts\RoomSetup.cs" line="34" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="Assets\Scripts\DoorHandler.cs" line="31" offsetX="564" offsetY="480" expression="gameStats.roomList[0]" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>

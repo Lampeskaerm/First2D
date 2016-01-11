@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class DoorHandler : MonoBehaviour {
-
+	public Sprite open, closed;
 	public string sceneName;
 
 	int ID;
-	bool goThrough;
+	bool goThrough, isOpen;
 	GameStats gameStats;
 
 	// Use this for initialization
@@ -27,10 +27,12 @@ public class DoorHandler : MonoBehaviour {
 			char c = sceneName [sceneName.Length - 1];
 			int sceneNo = (int)char.GetNumericValue (c);
 
-			if (gameStats.roomList [sceneNo] == null)
-				gameStats.roomList [sceneNo] = gameStats.NewRoom (sceneNo);
+			gameStats.ChangeScene (sceneNo);
+			if (gameStats.GetRoom(sceneNo) == null)
+				gameStats.SetRoom(gameStats.NewRoom (sceneNo), sceneNo);
 			
-			gameStats.currentRoom = gameStats.roomList[sceneNo];
+			gameStats.SetCurrentRoomNo (sceneNo);
+			gameStats.currentRoom = gameStats.GetRoom(sceneNo);
 			Application.LoadLevel(sceneName);
 		}
 	}
@@ -38,8 +40,21 @@ public class DoorHandler : MonoBehaviour {
 	public void GoThroughDoor(){
 
 		goThrough = true;
-
-		Debug.Log("YOU WENT THROUGH THE DOOR! :D");
 	}
 
+	public void SetSprite (string state) {
+		if (state == "Open") {
+			this.GetComponent<SpriteRenderer> ().sprite = open;
+		} else if (state == "Closed") {
+			this.GetComponent<SpriteRenderer> ().sprite = closed;
+		}
+	}
+
+	public bool IsOpen () {
+		return isOpen;
+	}
+
+	public void SetIsOpen(bool b) {
+		isOpen = b;
+	}
 }

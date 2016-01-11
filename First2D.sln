@@ -7,6 +7,8 @@ Project("{88520BB4-5313-3058-FA01-E963B1C8372D}") = "First2D", "Assembly-CSharp.
 EndProject
 Project("{88520BB4-5313-3058-FA01-E963B1C8372D}") = "First2D", "Assembly-CSharp-Editor.csproj", "{7BC774CA-7FE5-7152-43E0-C13FC8AC045D}"
 EndProject
+Project("{88520BB4-5313-3058-FA01-E963B1C8372D}") = "First2D", "Assembly-UnityScript.unityproj", "{2B74827C-1661-3257-A2F1-F8549BF2F64A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{7BC774CA-7FE5-7152-43E0-C13FC8AC045D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BC774CA-7FE5-7152-43E0-C13FC8AC045D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BC774CA-7FE5-7152-43E0-C13FC8AC045D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B74827C-1661-3257-A2F1-F8549BF2F64A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B74827C-1661-3257-A2F1-F8549BF2F64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B74827C-1661-3257-A2F1-F8549BF2F64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B74827C-1661-3257-A2F1-F8549BF2F64A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

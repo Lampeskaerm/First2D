@@ -3,49 +3,55 @@ using System.Collections;
 
 public class SwitchHandler : MonoBehaviour {
 	public Sprite stateInit, stateFinal, stateOther;
-	public enum State {OPEN, CLOSED};
-	State currState = State.CLOSED;
-	//true for open, false for closed
-	public State status;
+	private bool isOpen = false;
 
 	private int ID;
+	private DoorSystem parent;
+	private DoorHandler doorHandler;
 	private GameStats gameStats;
 
 	// Use this for initialization
 	void Start () {
-		ID = this.GetComponentInParent<DoorSystem> ().ID;
-		gameStats = FindObjectOfType<GameStats> ();
+		Setup ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (gameStats == null)
+			Setup ();
 	}
 
 	public void ChangeState () {
-		Debug.Log (currState.ToString ());
-		switch (currState) {
-		case State.OPEN:
+		Debug.Log (isOpen);
+		if (isOpen) {
 			//Sets the doorstatus for open.
-			gameStats.currentRoom.doorSystems [ID].GetComponent<SwitchHandler> ().status = State.CLOSED;
+			gameStats.currentRoom.doorSystems [ID].GetComponent<DoorSystem>().CloseDoorSystem();
+			parent.CloseDoorSystem ();
 
-			GetComponent<SpriteRenderer>().sprite = stateInit;
-			currState = State.CLOSED;
-			break;
-		case State.CLOSED:
-			//Sets the doorstatus for open.
-			gameStats.currentRoom.doorSystems [ID].transform.GetChild(1).GetComponent<SwitchHandler> ().status = State.OPEN;
+			GetComponent<SpriteRenderer> ().sprite = stateInit;
+			doorHandler.SetSprite ("Closed");
+		} else {
+			gameStats.currentRoom.doorSystems [ID].transform.FindChild("Switch").GetComponent<SwitchHandler> ().isOpen = true;
+			parent.OpenDoorSystem ();
 
 			GetComponent<SpriteRenderer>().sprite = stateFinal;
-			currState = State.OPEN;
-			break;
-		default:
-			break;
+			doorHandler.SetSprite ("Open");
 		}
 	}
 
-	public State GetState () {
-		return currState;
+	public void SetIsOpen (bool b) {
+		isOpen = b;
+		gameStats.currentRoom.doorSystems [ID].transform.FindChild("Switch").GetComponent<SwitchHandler> ().isOpen = isOpen;
 	}
 
+	public bool IsOpen () {
+		return isOpen;
+	}
+
+	private void Setup () {
+		parent = this.GetComponentInParent<DoorSystem> ();
+		doorHandler = parent.transform.FindChild ("Door").GetComponent<DoorHandler> ();
+		ID = parent.ID;
+		gameStats = FindObjectOfType<GameStats> ();
+	}
 }
