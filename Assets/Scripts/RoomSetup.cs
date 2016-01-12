@@ -23,32 +23,33 @@ public class RoomSetup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	void setupNewRoom() {
-		List<GameObject> doorSystems = GameObject.FindGameObjectsWithTag ("Doorsystem").ToList();
-		if (doorSystems.Count > 0) {
-			doorSystems = doorSystems.OrderBy (x => x.GetComponent<DoorSystem> ().ID).ToList ();
+		GameObject interactive = GameObject.FindGameObjectWithTag ("Interactive");
+		List<GameObject> io = new List<GameObject> ();
+		Dictionary<int,bool> itemsInfo = new Dictionary<int, bool>();
+		foreach (GameObject go in interactive) {
+			switch (go.tag) {
+			case "Doorsystem":
+				DoorSystem dscript = go.GetComponent<DoorSystem> ();
+				itemsInfo.Add (dscript.ID, dscript.isOpen);
+				break;
+			case "Pellet":
+			case "Diamond":
+				Collective cscript = go.GetComponent<Collective>();
+				itemsInfo.Add(cscript.ID,cscript.isTaken);
+				break;
+			default:
+				break;
+			}
 		}
-		gameStats.SetDoorsystems (doorSystems);
+		gameStats.UpdateItemsInfo (itemsInfo);
 		gameStats.currentRoom.spawned = true;
 	}
 
 	void setupRoom () {
-		List<GameObject> doorSystems = gameStats.currentRoom.doorSystems;
-		List<GameObject> dsig = GameObject.FindGameObjectsWithTag ("Doorsystem").ToList();
-		if (dsig.Count > 0)
-			dsig.OrderBy (x => x.GetComponent<DoorSystem> ().ID).ToList ();
-
-		for (int i = 0; i < dsig.Count; i++) {
-			GameObject ds = doorSystems [i];
-			if (ds != null) {
-				DoorSystem script = ds.GetComponent<DoorSystem> ();
-				Debug.Log ("The door is open: " + script.isOpen);
-				if (script.isOpen)
-					dsig [i].GetComponent<DoorSystem> ().OpenDoorSystem ();
-			}
-		}
+		foreach
 	}
 }

@@ -49,8 +49,8 @@ public class GameStats : MonoBehaviour {
 		return roomList;
 	}
 
-	public void SetDoorsystems (List<GameObject> doorSystems) {
-		currentRoom.doorSystems = doorSystems;
+	public void UpdateItemsInfo (Dictionary<int,bool> itemsInfo) {
+		currentRoom.itemsInfo = itemsInfo;
 		roomList [currentRoom.roomNo] = currentRoom;
 	}
 
@@ -62,16 +62,8 @@ public class GameStats : MonoBehaviour {
 		if (roomList [no] == null)
 			roomList [no] = NewRoom (no);
 
-		SetItemsInactive ();
-
 		currentRoomNo = no;
 		currentRoom = roomList [no];
-	}
-
-	public void SetItemsInactive() {
-		foreach (GameObject go in currentRoom.doorSystems) {
-			go.SetActive (false);
-		}
 	}
 }
 
