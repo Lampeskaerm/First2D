@@ -94,7 +94,6 @@ public class CharacterCollisions : MonoBehaviour {
 
 	void CollectPellet(GameObject pellet){
 		++collectedPellets;
-		pellet.SetActive (false);
-
+		pellet.GetComponent<Collective> ().Collect ();
 	}
 }

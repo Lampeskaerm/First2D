@@ -6,7 +6,7 @@ public class CharController : MonoBehaviour {
 	public float walkSpeed, runSpeed, jumpForce;
 
 	bool facingRight = true;
-	float speed;
+	float speed, movement;
 	Rigidbody2D rb;
 	Animator anim;
 
@@ -60,7 +60,9 @@ public class CharController : MonoBehaviour {
 		else 
 			speed = walkSpeed;
 
-		rb.velocity = new Vector2 (move * speed, rb.velocity.y);
+		movement = move * speed;
+
+		rb.velocity = new Vector2 (movement, rb.velocity.y);
 
 		anim.SetFloat ("Speed", Mathf.Abs (rb.velocity.x));
 
@@ -76,5 +78,9 @@ public class CharController : MonoBehaviour {
 		Vector3 scale = transform.localScale;
 		scale.x *= -1;
 		transform.localScale = scale;
+	}
+
+	public float GetMovement() {
+		return movement;
 	}
 }

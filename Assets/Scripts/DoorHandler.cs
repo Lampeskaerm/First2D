@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class DoorHandler : MonoBehaviour {
@@ -33,7 +34,7 @@ public class DoorHandler : MonoBehaviour {
 			
 			gameStats.SetCurrentRoomNo (sceneNo);
 			gameStats.currentRoom = gameStats.GetRoom(sceneNo);
-			Application.LoadLevel(sceneName);
+			SceneManager.LoadScene(sceneName);
 		}
 	}
 
@@ -42,19 +43,15 @@ public class DoorHandler : MonoBehaviour {
 		goThrough = true;
 	}
 
-	public void SetSprite (string state) {
-		if (state == "Open") {
-			this.GetComponent<SpriteRenderer> ().sprite = open;
-		} else if (state == "Closed") {
-			this.GetComponent<SpriteRenderer> ().sprite = closed;
-		}
-	}
-
 	public bool IsOpen () {
 		return isOpen;
 	}
 
 	public void SetIsOpen(bool b) {
 		isOpen = b;
+		if(b)
+			this.GetComponent<SpriteRenderer> ().sprite = open;
+		else 
+			this.GetComponent<SpriteRenderer> ().sprite = closed;
 	}
 }
