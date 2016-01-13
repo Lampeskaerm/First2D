@@ -11,7 +11,7 @@ public class RoomSetup : MonoBehaviour {
 	void Start () {
 		gameStats = FindObjectOfType<GameStats> ();
 
-		if (gameStats.GetRoomList() != null && gameStats.GetRoomList().Length != 0) {
+		if (gameStats.GetRoomList() != null && gameStats.GetRoomList().Count != 0) {
 			gameStats.currentRoom.roomNo = gameStats.GetCurrentRoomNo();
 			gameStats.SetRoom (gameStats.currentRoom, gameStats.currentRoom.roomNo);
 		}

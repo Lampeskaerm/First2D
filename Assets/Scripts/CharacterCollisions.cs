@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CharacterCollisions : MonoBehaviour {
 
-	int collectedPellets, totalPellets;
+	public Text score;
+
+	int collectedPoints, totalPellets;
 
 	//We need a cooldown for the interaction clicks when you enter the interaction trigger
 	//Else there will be registered a lot of clicks even though you only mean to click once
@@ -92,8 +95,16 @@ public class CharacterCollisions : MonoBehaviour {
 		}
 	}
 
-	void CollectPellet(GameObject pellet){
-		++collectedPellets;
-		pellet.GetComponent<Collective> ().Collect ();
+	void CollectPellet(GameObject point){
+		switch (point.tag) {
+		case "Pellet":
+			++collectedPoints;
+			break;
+		case "Diamond":
+			collectedPoints += 10;
+			break;
+		}
+		score.text = "Score: " + collectedPoints;
+		point.GetComponent<Collective> ().Collect ();
 	}
 }

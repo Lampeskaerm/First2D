@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class GameStats : MonoBehaviour {
 
+	public Level currentLevel;
+	public List<Level> levelList = new List<Level>();
 	public Room currentRoom;
-	public static Room[] roomList;
 	public static int levelScore = 0, currentRoomNo = 0;
 	public static float charPosX = -4.44f, charPosY = -2.69f;
 
@@ -15,7 +17,8 @@ public class GameStats : MonoBehaviour {
 	void Start () {
 		if (!spawned) {
 			spawned = true;
-			roomList = new Room[10];
+			currentLevel = new Level (0);
+			currentLevel.SetRoomList(new Dictionary<int,Room> ());
 
 			DontDestroyOnLoad (this);
 
@@ -38,32 +41,37 @@ public class GameStats : MonoBehaviour {
 	}
 
 	public Room GetRoom (int no) {
-		return roomList[no];
+		return currentLevel.GetRoomList()[no];
 	}
 
 	public void SetRoom (Room room, int no) {
-		roomList [no] = room;
+		Dictionary<int, Room> rl = currentLevel.GetRoomList ();
+		rl [no] = room;
+		currentLevel.SetRoomList(rl);
 	}
 
-	public Room[] GetRoomList () {
-		return roomList;
+	public Dictionary<int, Room> GetRoomList () {
+		return currentLevel.GetRoomList();
 	}
 
 	public void UpdateItemsInfo (Dictionary<int,bool> itemsInfo) {
 		currentRoom.itemsInfo = itemsInfo;
-		roomList [currentRoom.roomNo] = currentRoom;
-	}
-
-	public Room NewRoom (int no) {
-		return new Room(no);
+		Dictionary<int,Room> rl = currentLevel.GetRoomList ();
+		rl [currentRoom.roomNo] = currentRoom;
+		currentLevel.SetRoomList(rl);
 	}
 
 	public void ChangeScene (int no) {
-		if (roomList [no] == null)
-			roomList [no] = NewRoom (no);
+		
+		try {
+			currentRoom = GetRoom(no);
+		} catch (KeyNotFoundException e) {
+			SetRoom(new Room (no), no);
+			currentRoom = GetRoom(no);
+		}
+
 
 		currentRoomNo = no;
-		currentRoom = roomList [no];
 	}
 }
 
@@ -77,4 +85,25 @@ public class Room {
 	public Room (int no) {
 		roomNo = no;
 	}
+}
+
+[System.Serializable]
+public class Level {
+
+	public int score, ID;
+	public float health;
+	public static Dictionary<int, Room> roomList;
+
+	public Level (int no) {
+		this.ID = no;
+	}
+
+	public Dictionary<int,Room> GetRoomList () {
+		return roomList;
+	}
+
+	public void SetRoomList (Dictionary<int,Room> rl) {
+		roomList = rl;
+	}
+
 }

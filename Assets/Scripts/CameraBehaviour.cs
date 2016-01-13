@@ -26,9 +26,9 @@ public class CameraBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		Vector3 screenPos = camera.WorldToScreenPoint (target.position);
-		if (screenPos.x < margin)
+		if (screenPos.x <= margin)
 			rb.velocity = new Vector2 (targetScript.GetMovement (), rb.velocity.y);
-		else if (screenPos.x > (width - margin))
+		else if (screenPos.x >=(width - margin))
 			rb.velocity = new Vector2 (targetScript.GetMovement (), rb.velocity.y);
 		else
 			rb.velocity = Vector2.zero;

@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\PlayAudio.cs" />
      <Compile Include="Assets\Scripts\RoomSetup.cs" />
      <Compile Include="Assets\Scripts\SwitchHandler.cs" />
+     <Compile Include="Assets\Scripts\TextBehaviour.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
