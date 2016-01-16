@@ -8,7 +8,7 @@ public class GameStats : MonoBehaviour {
 	public Level currentLevel;
 	public List<Level> levelList = new List<Level>();
 	public Room currentRoom;
-	public static int levelScore = 0, currentRoomNo = 0;
+	public static int currentRoomNo = 0;
 	public static float charPosX = -4.44f, charPosY = -2.69f;
 
 	private static bool spawned = false;
@@ -61,7 +61,7 @@ public class GameStats : MonoBehaviour {
 		currentLevel.SetRoomList(rl);
 	}
 
-	public void ChangeScene (int no) {
+	public void ChangeRoom (int no) {
 		
 		try {
 			currentRoom = GetRoom(no);
@@ -72,6 +72,28 @@ public class GameStats : MonoBehaviour {
 
 
 		currentRoomNo = no;
+	}
+
+	public void SetScore (int no) {
+		currentLevel.score = no;
+	}
+
+	public int GetScore () {
+		return currentLevel.score;
+	}
+
+	public void ReduceHealth (float health) {
+		currentLevel.health -= health;
+		CheckForDeath ();
+	}
+
+	public float GetHealth () {
+		return currentLevel.health;
+	}
+
+	private void CheckForDeath () {
+		if (currentLevel.health <= 0)
+			Debug.Log ("You are dead!");
 	}
 }
 
@@ -91,7 +113,7 @@ public class Room {
 public class Level {
 
 	public int score, ID;
-	public float health;
+	public float health = 3;
 	public static Dictionary<int, Room> roomList;
 
 	public Level (int no) {

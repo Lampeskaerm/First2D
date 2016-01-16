@@ -1,12 +1,21 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextBehaviour : MonoBehaviour 
 {
+	GameStats gameStats;
+
 	void Start ()
 	{
-		//transform.position = Camera.main.ViewportToWorldPoint (new Vector3 (0,1,0));
-		Debug.Log (transform.position.ToString());
+		gameStats = FindObjectOfType<GameStats> ();
+	}
+
+	void Update () {
+		if (gameStats != null)
+			GetComponent<Text> ().text = "Score: " + gameStats.GetScore ();
+		else
+			gameStats = FindObjectOfType<GameStats> ();
 	}
 }
 

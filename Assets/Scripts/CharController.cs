@@ -31,18 +31,8 @@ public class CharController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (grounded && rb.velocity.y == 0) {
-			soundPlayed = false;
-		}
-		//Jump
-		if (grounded && Input.GetAxis ("Jump") > 0) {
-			anim.SetBool ("Ground", false);
-			rb.AddForce (new Vector2 (0, jumpForce));
-			if (!soundPlayed) {
-				jumpSound.Play ();
-				soundPlayed = true;
-			}
-		}
+		
+
 	}
 
 	void FixedUpdate() {
@@ -67,6 +57,21 @@ public class CharController : MonoBehaviour {
 
 		anim.SetFloat ("Speed", Mathf.Abs (rb.velocity.x));
 
+
+		if (grounded && rb.velocity.y == 0) {
+			soundPlayed = false;
+		}
+			
+		//Jump
+		if (grounded && Input.GetAxis ("Jump") > 0) {
+			anim.SetBool ("Ground", false);
+			rb.AddForce (new Vector2 (0, jumpForce));
+			if (!soundPlayed) {
+				jumpSound.Play ();
+				soundPlayed = true;
+			}
+		}
+
 		if (move > 0 && !facingRight) {
 			Flip ();
 		} else if (move < 0 && facingRight) {
@@ -83,5 +88,9 @@ public class CharController : MonoBehaviour {
 
 	public float GetMovement() {
 		return movement;
+	}
+
+	public bool IsFacingRight() {
+		return facingRight;
 	}
 }

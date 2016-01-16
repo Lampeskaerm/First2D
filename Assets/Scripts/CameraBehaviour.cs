@@ -11,24 +11,24 @@ public class CameraBehaviour : MonoBehaviour {
 	float width, height, margin;
 	Vector3 velocity = Vector3.zero;
 	Rigidbody2D rb;
-	Camera camera;
+	Camera cam;
 
 	// Use this for initialization
 	void Start () {
-		camera = GetComponent<Camera> ();
+		cam = GetComponent<Camera> ();
 		rb = GetComponent<Rigidbody2D> ();
 		targetScript = target.GetComponent<CharController> ();
-		width = camera.pixelWidth;
-		height = camera.pixelHeight;
+		width = cam.pixelWidth;
+		height = cam.pixelHeight;
 		margin = width / 5;
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		Vector3 screenPos = camera.WorldToScreenPoint (target.position);
-		if (screenPos.x <= margin)
+		Vector3 screenPos = cam.WorldToScreenPoint (target.position);
+		if (screenPos.x <= margin && !targetScript.IsFacingRight())
 			rb.velocity = new Vector2 (targetScript.GetMovement (), rb.velocity.y);
-		else if (screenPos.x >=(width - margin))
+		else if (screenPos.x >=(width - margin) && targetScript.IsFacingRight())
 			rb.velocity = new Vector2 (targetScript.GetMovement (), rb.velocity.y);
 		else
 			rb.velocity = Vector2.zero;

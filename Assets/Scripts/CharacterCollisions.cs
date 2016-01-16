@@ -4,9 +4,11 @@ using UnityEngine.UI;
 
 public class CharacterCollisions : MonoBehaviour {
 
-	public Text score;
+	public Text scoreText;
 
-	int collectedPoints, totalPellets;
+	private GameStats gameStats;
+	int lowestValue = 1, mediumValue = 2, highValue = 4, premiumValue = 10;
+	float lavaDamage = 3;
 
 	//We need a cooldown for the interaction clicks when you enter the interaction trigger
 	//Else there will be registered a lot of clicks even though you only mean to click once
@@ -15,23 +17,27 @@ public class CharacterCollisions : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		totalPellets = GameObject.FindGameObjectsWithTag ("Pellet").Length;
-		Debug.Log ("Total number of pellets:" + totalPellets);
+		gameStats = FindObjectOfType<GameStats> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (gameStats == null) {
+			gameStats = FindObjectOfType<GameStats> ();
+		}
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {
 		string tag = other.transform.tag;
 		switch (tag) {
-		case "Pellet":
-			CollectPellet(other.gameObject);
-			break;
+		case "Bronze":
+		case "Silver":
+		case "Gold":
 		case "Diamond":
-			CollectPellet(other.gameObject);
+			CollectPoint(other.gameObject);
+			break;
+		case "Lava":
+			LoseHP (lavaDamage);
 			break;
 		default:
 			break;
@@ -95,16 +101,27 @@ public class CharacterCollisions : MonoBehaviour {
 		}
 	}
 
-	void CollectPellet(GameObject point){
+	void CollectPoint(GameObject point){
+		int score = gameStats.GetScore();
 		switch (point.tag) {
-		case "Pellet":
-			++collectedPoints;
+		case "Bronze":
+			score += lowestValue;
+			break;
+		case "Silver":
+			score += mediumValue;
+			break;
+		case "Gold":
+			score += highValue;
 			break;
 		case "Diamond":
-			collectedPoints += 10;
+			score += premiumValue;
 			break;
 		}
-		score.text = "Score: " + collectedPoints;
+		gameStats.SetScore (score);
 		point.GetComponent<Collective> ().Collect ();
+	}
+
+	void LoseHP (float hp) {
+		gameStats.ReduceHealth (hp);
 	}
 }

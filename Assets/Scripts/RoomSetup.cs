@@ -47,10 +47,9 @@ public class RoomSetup : MonoBehaviour {
 				DoorSystem dscript = go.GetComponent<DoorSystem> ();
 				itemsInfo.Add (dscript.ID, dscript.isOpen);
 				break;
-			case "Pellet":
-				cscript = go.GetComponent<Collective>();
-				itemsInfo.Add(cscript.ID,cscript.isTaken);
-				break;
+			case "Bronze":
+			case "Silver":
+			case "Gold":
 			case "Diamond":
 				cscript = go.GetComponent<Collective>();
 				itemsInfo.Add(cscript.ID,cscript.isTaken);
@@ -79,7 +78,9 @@ public class RoomSetup : MonoBehaviour {
 					b = itemsInfo [id];
 					dscript.SetIsOpen (b);
 					break;
-				case "Pellet":
+				case "Bronze":
+				case "Silver":
+				case "Gold":
 				case "Diamond":
 					Collective cscript = go.GetComponent<Collective> ();
 					id = cscript.ID;

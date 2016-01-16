@@ -28,7 +28,7 @@ public class DoorHandler : MonoBehaviour {
 			char c = sceneName [sceneName.Length - 1];
 			int sceneNo = (int)char.GetNumericValue (c);
 
-			gameStats.ChangeScene (sceneNo);
+			gameStats.ChangeRoom (sceneNo);
 			if (gameStats.GetRoom(sceneNo) == null)
 				gameStats.SetRoom(new Room (sceneNo), sceneNo);
 			
