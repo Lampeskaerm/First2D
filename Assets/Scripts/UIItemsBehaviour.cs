@@ -28,7 +28,7 @@ public class UIItemsBehaviour : MonoBehaviour {
 		}
 	}
 
-	public List<string> GetTakenGems () {
+	public List<string> GetTaken () {
 		return taken;
 	}
 }

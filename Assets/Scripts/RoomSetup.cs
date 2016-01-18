@@ -43,10 +43,6 @@ public class RoomSetup : MonoBehaviour {
 			GameObject go = t.gameObject;
 			Collectable cscript;
 			switch (go.tag) {
-			case "Doorsystem":
-				DoorSystem dscript = go.GetComponent<DoorSystem> ();
-				itemsInfo.Add (dscript.ID, dscript.isOpen);
-				break;
 			case "Bronze":
 			case "Silver":
 			case "Gold":
@@ -72,12 +68,6 @@ public class RoomSetup : MonoBehaviour {
 				bool b;
 				GameObject go = t.gameObject;
 				switch (go.tag) {
-				case "Doorsystem":
-					DoorSystem dscript = go.GetComponent<DoorSystem> ();
-					id = dscript.ID;
-					b = itemsInfo [id];
-					dscript.SetIsOpen (b);
-					break;
 				case "Bronze":
 				case "Silver":
 				case "Gold":

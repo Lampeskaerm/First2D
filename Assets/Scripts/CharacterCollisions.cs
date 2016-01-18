@@ -103,8 +103,16 @@ public class CharacterCollisions : MonoBehaviour {
 		string tag = col.tag;
 		switch (tag) {
 		case "Door":
+			GameObject obj = col.gameObject;
+			DoorHandler dh = obj.GetComponent<DoorHandler> ();
+			if (!dh.IsOpen ()) {
+				string color = obj.name.Replace ("Door", "");
+				if (Input.GetAxis ("Interaction") != 0 && uiKeys.GetTaken ().Contains ("hud_key" + color))
+					dh.OpenDoor ();
+			} else {
+				dh.GoThrough ();
+			}
 			break;
-
 		default:
 			break;
 		}
