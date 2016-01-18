@@ -9,7 +9,6 @@ public class GameStats : MonoBehaviour {
 	public List<Level> levelList = new List<Level>();
 	public Room currentRoom;
 	public static int currentRoomNo = 0;
-	public static float charPosX = -4.44f, charPosY = -2.69f;
 
 	private static bool spawned = false;
 
@@ -91,9 +90,18 @@ public class GameStats : MonoBehaviour {
 		return currentLevel.health;
 	}
 
+	public Vector3 GetInitialPosition () {
+		return currentLevel.initialCharacterPosition;
+	}
+
 	private void CheckForDeath () {
-		if (currentLevel.health <= 0)
-			Debug.Log ("You are dead!");
+		CharController cc = FindObjectOfType<CharController> ();
+		cc.ResetCharacter (GetInitialPosition());
+		CameraBehaviour cam = Camera.main.GetComponent<CameraBehaviour> ();
+		cam.SetPosition (new Vector3(cc.transform.position.x, cam.transform.position.y, cam.transform.position.z));
+		if (currentLevel.health <= 0) {
+			currentLevel.health = currentLevel.initialHealth;
+		}
 	}
 }
 
@@ -113,11 +121,13 @@ public class Room {
 public class Level {
 
 	public int score, ID;
-	public float health = 3;
+	public float health, initialHealth = 3f;
 	public static Dictionary<int, Room> roomList;
+	public Vector3 initialCharacterPosition = new Vector3 (-4.44f, -2.69f, 1);
 
 	public Level (int no) {
 		this.ID = no;
+		health = initialHealth;
 	}
 
 	public Dictionary<int,Room> GetRoomList () {

@@ -41,7 +41,7 @@ public class RoomSetup : MonoBehaviour {
 		Dictionary<int,bool> itemsInfo = new Dictionary<int, bool>();
 		foreach (Transform t in children) {
 			GameObject go = t.gameObject;
-			Collective cscript;
+			Collectable cscript;
 			switch (go.tag) {
 			case "Doorsystem":
 				DoorSystem dscript = go.GetComponent<DoorSystem> ();
@@ -51,7 +51,7 @@ public class RoomSetup : MonoBehaviour {
 			case "Silver":
 			case "Gold":
 			case "Diamond":
-				cscript = go.GetComponent<Collective>();
+				cscript = go.GetComponent<Collectable>();
 				itemsInfo.Add(cscript.ID,cscript.isTaken);
 				break;
 			default:
@@ -82,7 +82,7 @@ public class RoomSetup : MonoBehaviour {
 				case "Silver":
 				case "Gold":
 				case "Diamond":
-					Collective cscript = go.GetComponent<Collective> ();
+					Collectable cscript = go.GetComponent<Collectable> ();
 					id = cscript.ID;
 					b = itemsInfo [id];
 					cscript.SetIsTaken (b);

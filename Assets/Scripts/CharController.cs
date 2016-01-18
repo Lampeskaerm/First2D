@@ -6,16 +6,21 @@ public class CharController : MonoBehaviour {
 
 	public float walkSpeed, runSpeed, jumpForce;
 
+
+	//Fall variables
+	public Transform groundCheck;
+	public LayerMask whatIsGround;
+
+	bool grounded, soundPlayed, killed;
+	float groundRadius = 0.2f;
+
+
 	bool facingRight = true;
 	float speed, movement;
 	Rigidbody2D rb;
 	Animator anim;
 
-	//Fall variables
-	public Transform groundCheck;
-	public LayerMask whatIsGround;
-	bool grounded, soundPlayed;
-	float groundRadius = 0.2f;
+	GameStats gameStats;
 
 	//Audio Sources
 	AudioSource jumpSound;
@@ -25,13 +30,14 @@ public class CharController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
 		jumpSound = transform.GetComponentInChildren<AudioSource> ();
-
-		transform.position = new Vector2 (GameStats.charPosX, GameStats.charPosY);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (gameStats == null) {
+			gameStats = FindObjectOfType<GameStats> ();
+			transform.position = gameStats.GetInitialPosition ();
+		}
 
 	}
 
@@ -54,7 +60,6 @@ public class CharController : MonoBehaviour {
 		movement = move * speed;
 
 		rb.velocity = new Vector2 (movement, rb.velocity.y);
-
 		anim.SetFloat ("Speed", Mathf.Abs (rb.velocity.x));
 
 
@@ -92,5 +97,9 @@ public class CharController : MonoBehaviour {
 
 	public bool IsFacingRight() {
 		return facingRight;
+	}
+
+	public void ResetCharacter (Vector3 position) {
+		transform.position = position;
 	}
 }

@@ -4,7 +4,6 @@ using System.Collections;
 public class CameraBehaviour : MonoBehaviour {
 
 	public Transform target;
-	public int minX, maxX;
 	public float dampTime = 2f;
 	public CharController targetScript;
 
@@ -32,5 +31,9 @@ public class CameraBehaviour : MonoBehaviour {
 			rb.velocity = new Vector2 (targetScript.GetMovement (), rb.velocity.y);
 		else
 			rb.velocity = Vector2.zero;
+	}
+
+	public void SetPosition (Vector3 pos) {
+		transform.position = pos;
 	}
 }
